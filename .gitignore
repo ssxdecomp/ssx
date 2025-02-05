@@ -7,6 +7,10 @@ permuter_settings.toml
 # ninja
 *.ninja
 .ninja_log
+compile_commands.json
+
+# clangd
+.cache/
 
 # splat
 asm/
