@@ -1,0 +1,61 @@
+name: SSX (2000) (USA)
+sha1: 72d85fcefffc2bcaa1eeacbc02a8965ababb6e92
+
+options:
+  basename: SLUS_200.95
+  target_path: disc/SLUS_200.95
+  elf_path: SLUS_200.95
+  base_path: ../
+  platform: ps2
+  compiler: GCC
+
+  asm_path: asm
+  src_path: src/
+  build_path: obj
+
+  rodata_string_guesser_level: 0
+
+  find_file_boundaries: False
+  disasm_unknown: True
+  named_regs_for_c_funcs: False
+
+  create_undefined_funcs_auto: True
+  undefined_funcs_auto_path: config/undefined_funcs_auto.txt
+  create_undefined_syms_auto: True
+  undefined_syms_auto_path: config/undefined_syms_auto.txt
+
+  symbol_addrs_path: symbol_addrs.txt
+
+  extensions_path: tools/splat_ext
+
+  section_order: [".text", ".vutext", ".data", ".rodata", ".bss"]
+  auto_all_sections: [".data", ".rodata", ".bss"]
+
+  subalign: 4
+
+segments:
+  - [0, databin, elf_header]
+
+  - name: main
+    type: code
+    start: 0x1000
+    vram: 0x100000
+    bss_size: 0x01228c # I think?
+    subsegments:
+      - [0x001000, asm, sce/crt0]
+      - [0x0010a8, asm, sce/syscalls/exit]
+      
+      - [0x8b648, asm, bx/main]
+
+      - [0x8bc08, asm, libc/printf]
+
+      # --- .vutext
+      - [0x16b260, textbin, vutext]
+
+      # --- .data
+      - [0x178900, data]
+
+      # --- .rodata
+      - [0x1a7b00, rodata]
+
+  - [0x1d4c18]

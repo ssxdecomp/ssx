@@ -1,0 +1,13 @@
+name: SSX
+platform: ps2
+versions:
+  - name: US
+    fullname: NTSC-U release (SLUS-20095)
+    paths:
+      baserom: 'disc/SLUS_200.95'
+      build: 'build/SLUS_200.95'
+      asm: 'asm'
+      nonmatchings: 'asm/nonmatchings'
+      map: 'out/SLUS_200.95.map'
+      elf: 'out/SLUS_200.95'
+tools:
