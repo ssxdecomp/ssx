@@ -1,0 +1,13 @@
+// SDK: Runtime Library 1.6.0 (with patches up to 1.6.3)
+
+// CRT0
+_start = 0x100008; // type:func
+_exit = 0x1000b8; // type:func
+
+// libc
+printf = 0x18ac08; // type:func
+malloc = 0x259ac0; // type:func
+free = 0x259ae8; // type:func
+
+// libgcc
+__main = 0x255e8; // type:func

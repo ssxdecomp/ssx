@@ -24,7 +24,7 @@ options:
   create_undefined_syms_auto: True
   undefined_syms_auto_path: config/undefined_syms_auto.txt
 
-  symbol_addrs_path: symbol_addrs.txt
+  symbol_addrs_path: [ config/symbol_addrs.txt, config/lib_symbol_addrs.txt ]
 
   extensions_path: tools/splat_ext
 
