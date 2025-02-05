@@ -25,7 +25,7 @@ PRE_ELF_PATH = f"{OUTDIR}/{BASENAME}.elf"
 COMMON_INCLUDES = "-Iinclude -isystem include/sdk/ee -isystem include/gcc"
 
 
-CC_DIR = f"{TOOLS_DIR}/cc/ee-991111-01/"
+CC_DIR = f"{TOOLS_DIR}/cc/ee-991111-01"
 DRIVER_PATH_FLAG = f"-B{CC_DIR}/lib/gcc-lib/ee/2.9-ee-991111-01/"
 
 # See tools/cc/README.md for how these were gathered
