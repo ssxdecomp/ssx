@@ -7,7 +7,7 @@ options:
   elf_path: SLUS_200.95
   base_path: ../
   platform: ps2
-  compiler: GCC
+  compiler: EEGCC
 
   asm_path: asm
   src_path: src/
@@ -29,7 +29,7 @@ options:
   extensions_path: tools/splat_ext
 
   section_order: [".text", ".vutext", ".data", ".rodata", ".bss"]
-  auto_all_sections: [".data", ".rodata", ".bss"]
+  auto_link_sections: [".data", ".rodata", ".bss"]
 
   subalign: 4
 
@@ -43,7 +43,10 @@ segments:
     bss_size: 0x01228c # I think?
     subsegments:
       - [0x001000, asm, sce/crt0]
-      - [0x0010a8, asm, sce/syscalls/exit]
+
+      - [0x0010b8, asm] # seems to be ai related based on MEM_alloc/cBlockMan::Alloc strings
+                        # cAINode memfns are suspiciously close to this split so this might be
+                        # ainode.cpp ? unsure
       
       - [0x8b648, asm, bx/main]
 
@@ -58,4 +61,4 @@ segments:
       # --- .rodata
       - [0x1a7b00, rodata]
 
-  - [0x1d4c18]
+  - [0x1d4c1c]
