@@ -17,13 +17,17 @@ You will need:
 `# pacman -S lib32-gcc-libs`
 `$ yay (or whatever AUR helper you have decided on. or honestly git clone) -S mips-linux-gnu-binutils`
 
+### Debian/Ubuntu
+
+`# apt install -y binutils-mips-linux-gnu ninja-build`
+
 Make a `disc` directory in the root of this repository, and copy the files from the NTSC-U game disc.
 
 Setup a venv for splat:
 
 ```bash
 $ python -m venv venv
-$ . bin/venv/activate
+$ . venv/bin/activate
 (venv) $ pip install -r requirements.txt
 ```
 
