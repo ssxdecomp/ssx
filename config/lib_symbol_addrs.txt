@@ -1,8 +1,9 @@
 // SDK: Runtime Library 1.6.0 (with patches up to 1.6.3)
 
 // CRT0
-_start = 0x100008; // type:func
-_exit = 0x1000b8; // type:func
+_start = 0x100000; // type:func
+_exit = 0x1000a8; // type:func
+_root = 0x1000b0; // type:func
 
 // libc
 printf = 0x18ac08; // type:func

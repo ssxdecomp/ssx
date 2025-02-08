@@ -13,6 +13,9 @@ options:
   src_path: src/
   build_path: obj
 
+  # Put 'hasm' splits in src/
+  hasm_in_src_path: True
+
   rodata_string_guesser_level: 0
 
   find_file_boundaries: False
@@ -42,7 +45,7 @@ segments:
     vram: 0x100000
     bss_size: 0x01228c # I think?
     subsegments:
-      - [0x001000, asm, sce/crt0]
+      - [0x001000, hasm, sce/crt0]
 
       - [0x0010b8, asm] # seems to be ai related based on MEM_alloc/cBlockMan::Alloc strings
                         # cAINode memfns are suspiciously close to this split so this might be
