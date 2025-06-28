@@ -102,7 +102,7 @@ def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False):
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w", encoding="utf-8"), width=9999)
 
-    cross = "mips-linux-gnu-"
+    cross = f"tools/binutils/mips-ps2-decompals-"
 
     ld_args = "-EL -T config/undefined_syms_auto.txt -T config/undefined_funcs_auto.txt -Map $mapfile -T $in -o $out"
 

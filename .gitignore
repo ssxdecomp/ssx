@@ -6,6 +6,7 @@ permuter_settings.toml
 
 # ninja
 *.ninja
+.ninja_lock
 .ninja_log
 compile_commands.json
 
@@ -25,5 +26,8 @@ disc/
 
 # for ref only
 tools/cc/ee-990721/
+
+# decompals
+tools/binutils
 
 venv/

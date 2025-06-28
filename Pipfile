@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+spimdisasm = ">=1.28.1"
+rabbitizer = ">=1.8.0"
+splat64 = "==0.27.0"
+ninja = "*"
+ninja-syntax = "*"
+n64img = "*"
+pygfxd = "*"
+crunch64 = "*"
+mapfile-parser = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.13"
