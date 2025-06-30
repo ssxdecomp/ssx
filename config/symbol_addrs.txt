@@ -2,3 +2,17 @@
 // src/bx/main.cpp
 __NullFunc__FUi = 0x18a858; // type:func
 main = 0x18ab98; // type:func
+
+// src/bx/venuedb.cpp
+
+// FUNCS
+__8cVenueDB = 0x18ac50; // type:func
+_$_8cVenueDB = 0x18ac78; // type:func
+initOnce__8cVenueDB = 0x18acc8; // type:func
+purge__8cVenueDB = 0x18ad90; // type:func
+getName__8cVenueDB8eVenueId = 0x18ada0; // type:func
+getUpperName__8cVenueDB8eVenueId = 0x18adc8; // type:func
+// FUN_0018adf0 could be part of cVenueDB
+checkId__8cVenueDB8eVenueId = 0x18ae70; // type:func
+
+// (RO)DATA

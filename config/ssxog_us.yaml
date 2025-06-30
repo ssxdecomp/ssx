@@ -8,6 +8,7 @@ options:
   base_path: ../
   platform: ps2
   compiler: EEGCC
+  endianness: little
 
   asm_path: asm
   src_path: src/
@@ -16,11 +17,17 @@ options:
   # Put 'hasm' splits in src/
   hasm_in_src_path: True
 
-  rodata_string_guesser_level: 0
+  use_legacy_include_asm: False
 
-  find_file_boundaries: False
   disasm_unknown: True
-  named_regs_for_c_funcs: False
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  find_file_boundaries: True
+  pair_rodata_to_text: True
+  auto_decompile_empty_functions: True
+  do_c_func_detection: True
+  suggestion_rodata_section_start: True
+  migrate_rodata_to_functions: True
 
   create_undefined_funcs_auto: True
   undefined_funcs_auto_path: config/undefined_funcs_auto.txt
@@ -31,37 +38,100 @@ options:
 
   extensions_path: tools/splat_ext
 
-  section_order: [".text", ".vutext", ".data", ".rodata", ".bss"]
-  auto_link_sections: [".data", ".rodata", ".bss"]
+  section_order: [
+    ".text", 
+    ".vutext", 
+    ".reginfo", 
+    ".data", 
+    ".vudata", 
+    ".rodata", 
+    ".lit4", 
+    ".sdata", 
+    ".sbss", 
+    ".bss", 
+    ".vubss"
+  ]
 
-  subalign: 4
+  auto_link_sections: [
+    ".text", 
+    ".data", 
+    ".rodata", 
+    ".lit4", 
+    ".sdata", 
+    ".sbss", 
+    ".bss",
+  ]
+
+  gp_value: 0x002c8ff0
+
 
 segments:
-  - [0, databin, elf_header]
+  - name: elf_header
+    type: databin
+    start: 0x0
 
   - name: main
     type: code
     start: 0x1000
     vram: 0x100000
-    bss_size: 0x01228c # I think?
+    bss_size: 0x1227c # I think?
+    align: 4
+    subalign: null
     subsegments:
-      - [0x001000, hasm, sce/crt0]
+      # -- .text
 
-      - [0x0010b8, asm] # seems to be ai related based on MEM_alloc/cBlockMan::Alloc strings
-                        # cAINode memfns are suspiciously close to this split so this might be
-                        # ainode.cpp ? unsure
+      - { type: asm, start: 0x001000, vram: 0x100000, name: lib/sdk/sce/crt0 }
+
+      # start of actual sources (besides crt0)
+
+      - { type: asm, start: 0x0010b8 }  # seems to be ai related based on MEM_alloc/cBlockMan::Alloc strings
+                                        # cAINode memfns are suspiciously close to this split so this might be
+                                        # ainode.cpp ? unsure
+                                        # order is suspect of this being the case, since this split also contains
+                                        # the first static initalizer function
+
+      - { type: asm, start: 0x8b648, name: bx/main }
+
+      - { type: asm, start: 0x8bc08, name: lib/sdk/newlib/printf }
+
+      - { type: asm, start: 0x8bc50, name: bx/venuedb }
       
-      - [0x8b648, asm, bx/main]
+      - { type: asm, start: 0x8bec8, name: bx/unk_global_memory_operators }
 
-      - [0x8bc08, asm, libc/printf]
+      # -- end of text
 
       # --- .vutext
-      - [0x16b260, textbin, vutext]
+      - { type: databin, start: 0x16b260, vram: 0x26a260, name: vutext }
+
 
       # --- .data
-      - [0x178900, data]
+      - { type: data, start: 0x178900, vram: 0x277900, name: data }
+
+      # --- .vudata
+      - { type: databin, vram: 0x2a6ab8, start: 0x1a7ab8, name: vudata }
 
       # --- .rodata
-      - [0x1a7b00, rodata]
+      - { type: rodata, start: 0x1a7b00, vram: 0x2a6b00, name: rodata }
 
+      # --- .lit4 (TODO: SPLIT)
+      - { type: lit4, vram: 0x2c1000, start: 0x1c2000, name: lit4 }
+
+      # -- SDATA
+      - { type: sdata, vram: 0x2c3f80, start: 0x1c4f80, name: sdata }
+
+      # -- SBSS (TODO!!! SPLIT!!!)
+      - { type: sbss, vram: 0x2c5b80, start: 0x1c6b80, name: sbss }
+
+
+      # -- BSS (TODO!! SPLIT!!)
+      - { type: bss, vram: 0x2c6c80, start: 0x1c6bf4, name: bss }
+
+      # -- VUBSS
+      - { type: bss, vram: 0x2d7f0c, start: 0x1c6bf4, name: vubss }
+
+  #- { type: databin, start: 0x1c6bf4, name: reginfo } # .reginfo section
+  - { type: databin, start: 0x1d3c4b, name: shstrtab }
+
+  # Unknown padding right after .shstrtab
+  - { type: databin, start: 0x1d4331, name: padding }
   - [0x1d4c1c]
