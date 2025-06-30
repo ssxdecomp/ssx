@@ -4,10 +4,10 @@ The following compilers were known to be used for SSX OG:
 
 | Compiler                | Description                                                                                                          |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| ee-gcc 2.9-ee-990721    | From the Pre-release toolchain 0.5.0 (EB-S8220) for the EE. Used presumably from release of TC 0.5 to TC 2.0 release |
-| ee-gcc 2.9-ee-991111-01 | Used from Toolchain 2.0 Release date (August 20, 2000) to gold builds                                                |
+| ee-gcc 2.9-ee-990721    | From the Pre-release toolchain 0.5.0 (EB-S8220) for the EE. Used presumably from TC 0.5 release to TC 1.0 release    |
+| ee-gcc 2.9-ee-991111    | Used from Toolchain 1.0(?) Release date (~November 11, 1999) to gold builds                                          |
 
-We have been able to recover important compiler flags (for at least C) from a makefile fragment that was pressent in a US demo build. They are:
+We have been able to recover important compiler flags (for at least C) from a makefile fragment that was accidentally included as uninitalized memory in a US demo build. They are:
 
 | Type                    | Flags                                    | Notes                                                              |
 | ----------------------- | ---------------------------------------- | ------------------------------------------------------------------ |
@@ -17,4 +17,4 @@ We have been able to recover important compiler flags (for at least C) from a ma
 
 It is surmised that `-fno-rtti` and possibly `-fno-exceptions` were also given for C++ compilation
 
-`-fno-edge-lcm` does not exist in ee-990721, which is how it has been figured out that ee-991111-01 was used for the final builds.
+`-fno-edge-lcm` does not exist in ee-990721, which is how it has been figured out that ee-991111 was used for the final builds.

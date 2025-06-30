@@ -25,8 +25,8 @@ PRE_ELF_PATH = f"{OUTDIR}/{BASENAME}.elf"
 COMMON_INCLUDES = "-Iinclude -isystem include/sdk/ee -isystem include/gcc"
 
 
-CC_DIR = f"{TOOLS_DIR}/cc/ee-991111-01"
-DRIVER_PATH_FLAG = f"-B{CC_DIR}/lib/gcc-lib/ee/2.9-ee-991111-01/"
+CC_DIR = f"{TOOLS_DIR}/cc/ee-991111"
+DRIVER_PATH_FLAG = f"-B{CC_DIR}/lib/gcc-lib/ee/2.9-ee-991111/"
 
 # See tools/cc/README.md for how these were gathered
 COMMON_CFLAGS = "-O2 -fno-edge-lcm -fomit-frame-pointer"
@@ -63,8 +63,7 @@ compiler_type = "gcc"
 [preserve_macros]
 
 [decompme.compilers]
-"tools/cc/ee-990721/bin/gcc" = "ee-gcc2.9-990721"
-"tools/cc/ee-990721/bin/g++" = "ee-gcc2.9-990721"
+"tools/cc/ee-991111/bin/ee-gcc" = "ee-gcc2.9-991111"
 """)
 
 def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False):
