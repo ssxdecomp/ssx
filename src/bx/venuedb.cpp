@@ -8,7 +8,10 @@ INCLUDE_ASM("bx/venuedb", _$_8cVenueDB);
 
 INCLUDE_ASM("bx/venuedb", initOnce__8cVenueDB);
 
-INCLUDE_ASM("bx/venuedb", purge__8cVenueDB);
+void cVenueDB::purge() {
+    mVenueCount = 0;
+    mUnk = 0;
+}
 
 INCLUDE_ASM("bx/venuedb", getName__8cVenueDBi);
 #if 0
