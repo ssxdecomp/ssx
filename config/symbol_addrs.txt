@@ -1,4 +1,11 @@
 
+// This isn't actually correct; as far as I can tell
+// operator new/operator delete (or __builtin_new/__builtin_delete)
+// were actually inlined. But this is the one that's called the most,
+// so...
+// (this will invariably bite me in the ass...)
+__builtin_delete = 0x103778;
+
 // src/bx/main.cpp
 // FUNCS
     __NullFunc__FUi = 0x18a858; // type:func

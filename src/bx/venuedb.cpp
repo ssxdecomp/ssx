@@ -1,24 +1,34 @@
 #include "bx/venuedb.h"
 
-cVenueDB::cVenueDB() {
-    purge();
+cVenueDB::cVenueDB()
+{
+	purge();
 }
 
 INCLUDE_ASM("bx/venuedb", _$_8cVenueDB);
+#if 0
+cVenueDB::~cVenueDB() 
+{
+    purge();
+}
+#endif
 
 INCLUDE_ASM("bx/venuedb", initOnce__8cVenueDB);
 
-void cVenueDB::purge() {
-    mVenueCount = 0;
-    mUnk = 0;
+void cVenueDB::purge()
+{
+	mVenueCount = 0;
+	mUnk = 0;
 }
 
 INCLUDE_ASM("bx/venuedb", getName__8cVenueDBi);
 #if 0
 // not matching :( but REALLY close
 // (literally one wrong register off)
-const char* cVenueDB::getName(i32 venueId) {
-    if(venueId >= 0) {
+const char* cVenueDB::getName(i32 venueId) 
+{
+    if(venueId >= 0)
+    {
         venueId = mVenueCount > venueId;
     }
     return mVenues[venueId].alternateName;
@@ -27,8 +37,10 @@ const char* cVenueDB::getName(i32 venueId) {
 
 INCLUDE_ASM("bx/venuedb", getBigfileName__8cVenueDBi);
 #if 0
-const char* cVenueDB::getBigfileName(i32 venueId) {
-    if(venueId >= 0) {
+const char* cVenueDB::getBigfileName(i32 venueId) 
+{
+    if(venueId >= 0) 
+    {
         venueId = mVenueCount > venueId;
     }
     return mVenues[venueId].bigFilename;
@@ -37,10 +49,12 @@ const char* cVenueDB::getBigfileName(i32 venueId) {
 
 INCLUDE_ASM("bx/venuedb", findVenueIndex__8cVenueDBPCc);
 #if 0
-i32 cVenueDB::findVenueIndex(const char* pszName) {
+i32 cVenueDB::findVenueIndex(const char* pszName) 
+{
     i32 i = 0;
     tListEntry* pVenue = &mVenues[0];
-    while(true) {
+    while(true) 
+    {
         if(mVenueCount <= i)
             break;
         
