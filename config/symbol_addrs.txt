@@ -22,5 +22,6 @@ __builtin_delete = 0x103778;
     getBigfileName__8cVenueDBi = 0x18adc8; // type:func
     findVenueIndex__8cVenueDBPCc = 0x18adf0; // type:func
     checkId__8cVenueDBi = 0x18ae70; // type:func
+    clampId__8cVenueDBi = 0x18aea8; // type:func
 // (RO)DATA
     _8cVenueDB$venueDB = 0x27e140; // size:0xf0

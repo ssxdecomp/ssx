@@ -49,6 +49,7 @@ public:
     int findVenueIndex(const char* name);
 
     i32 checkId(i32 id);
+    i32 clampId(i32 id);
 
 private:
     int mVenueCount;

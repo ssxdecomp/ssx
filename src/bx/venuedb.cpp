@@ -71,4 +71,4 @@ i32 cVenueDB::findVenueIndex(const char* pszName)
 
 INCLUDE_ASM("bx/venuedb", checkId__8cVenueDBi);
 
-INCLUDE_ASM("bx/venuedb", func_0018AEA8);
+INCLUDE_ASM("bx/venuedb", clampId__8cVenueDBi);
