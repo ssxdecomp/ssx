@@ -1,7 +1,9 @@
 #include "common.h"
 #include "bx/venuedb.h"
 
-INCLUDE_ASM("bx/venuedb", __8cVenueDB);
+cVenueDB::cVenueDB() {
+    purge();
+}
 
 INCLUDE_ASM("bx/venuedb", _$_8cVenueDB);
 

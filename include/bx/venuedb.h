@@ -1,3 +1,5 @@
+#include "common.h"
+
 typedef enum {
     kVenueID_Snowdream,
     kVenueID_Mesablanca,
@@ -20,6 +22,10 @@ typedef struct {
     const char* bigFileName;
 } tVenueDBEntry;
 
+// There are external references to this, so I imagine it's either
+// an extern like so, or a public static inside of cVenueDB.
+extern tVenueDBEntry venueDB[12];
+
 class cVenueDB {
     typedef struct {
         char bigFileName[64];
@@ -41,5 +47,8 @@ public:
 
     eVenueId checkId(eVenueId id);
 
-    static tVenueDBEntry venueDB[12];
+private:
+    int mVenueCount;
+    tListEntry mVenues[12];
+    int mUnk;
 };
