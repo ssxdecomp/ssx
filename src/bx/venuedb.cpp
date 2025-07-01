@@ -71,4 +71,11 @@ i32 cVenueDB::findVenueIndex(const char* pszName)
 
 INCLUDE_ASM("bx/venuedb", checkId__8cVenueDBi);
 
-INCLUDE_ASM("bx/venuedb", clampId__8cVenueDBi);
+i32 cVenueDB::clampId(i32 id)
+{
+	i32 venueId = mVenues[id].venueId;
+	// static_cast<> is needed here since arraysize() returns a unsigned integer.
+	if (static_cast<i32>(arraysize(mVenues) - 1) < venueId)
+		venueId = (arraysize(mVenues) - 1);
+	return venueId;
+}
