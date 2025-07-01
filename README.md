@@ -18,8 +18,7 @@ You will need:
 
 ### Debian/Ubuntu
 
-`# apt install -y binutils-mips-linux-gnu ninja-build`
-
+`# apt install -y pipenv ninja-build`
 
 Make a `disc` directory in the root of this repository, and copy the files from the NTSC-U game disc.
 

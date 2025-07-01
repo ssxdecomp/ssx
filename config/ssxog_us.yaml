@@ -29,6 +29,8 @@ options:
   suggestion_rodata_section_start: True
   migrate_rodata_to_functions: True
 
+  named_regs_for_c_funcs: False
+
   create_undefined_funcs_auto: True
   undefined_funcs_auto_path: config/undefined_funcs_auto.txt
   create_undefined_syms_auto: True
@@ -80,7 +82,7 @@ segments:
     subsegments:
       # -- .text
 
-      - { type: asm, start: 0x001000, vram: 0x100000, name: lib/sdk/sce/crt0 }
+      - { type: hasm, start: 0x001000, vram: 0x100000, name: lib/sdk/sce/crt0 }
 
       # start of actual sources (besides crt0)
 
@@ -94,7 +96,7 @@ segments:
 
       - { type: asm, start: 0x8bc08, name: lib/sdk/newlib/printf }
 
-      - { type: asm, start: 0x8bc50, name: bx/venuedb }
+      - { type: cpp, start: 0x8bc50, name: bx/venuedb }
       
       - { type: asm, start: 0x8bec8, name: bx/unk_global_memory_operators }
 
