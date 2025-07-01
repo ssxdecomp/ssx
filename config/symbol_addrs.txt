@@ -11,9 +11,9 @@
     _$_8cVenueDB = 0x18ac78; // type:func
     initOnce__8cVenueDB = 0x18acc8; // type:func
     purge__8cVenueDB = 0x18ad90; // type:func
-    getName__8cVenueDB8eVenueId = 0x18ada0; // type:func
-    getBigfileName__8cVenueDB8eVenueId = 0x18adc8; // type:func
+    getName__8cVenueDBi = 0x18ada0; // type:func
+    getBigfileName__8cVenueDBi = 0x18adc8; // type:func
     findVenueIndex__8cVenueDBPCc = 0x18adf0; // type:func
-    checkId__8cVenueDB8eVenueId = 0x18ae70; // type:func
+    checkId__8cVenueDBi = 0x18ae70; // type:func
 // (RO)DATA
     _8cVenueDB$venueDB = 0x27e140; // size:0xf0

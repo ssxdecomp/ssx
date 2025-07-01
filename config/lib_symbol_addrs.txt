@@ -10,6 +10,7 @@ printf = 0x18ac08; // type:func
 malloc = 0x259ac0; // type:func
 free = 0x259ae8; // type:func
 sprintf = 0x25b630; // type:func
+strcmp = 0x25baa0; // type:func
 strcpy = 0x25bbe4; // type:func
 
 // libgcc

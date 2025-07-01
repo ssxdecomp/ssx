@@ -9,12 +9,12 @@ typedef enum {
     kVenueID_Aloha,
     kVenueID_BigAirDome,
     kVenueID_Merqury,
-    kVenueID_Circuit, // Actually warmum
+    kVenueID_Circuit, // Actually warmup
     kVenueID_Frontend3D = 0xffffffff
 } eVenueId;
 
 typedef struct {
-    eVenueId id;
+    i32 id;
     const char* name; // The full name. E.g: "Snow Dream"
     const char* displayName;
     int showoffTimeLimit; // In game ticks (60hz)
@@ -28,24 +28,27 @@ extern tVenueDBEntry venueDB[12];
 
 class cVenueDB {
     typedef struct {
-        char bigFileName[64];
+        char bigFilename[64];
         char alternateName[64];
-        eVenueId venueId;
+        i32 venueId;
     } tListEntry;
 
 public:
     cVenueDB();
     ~cVenueDB();
 
+    // Initalizes the venue database.
     void initOnce();
+
+    // purges the database.
     void purge();
 
-    const char* getName(eVenueId id);
-    const char* getBigfileName(eVenueId id);
+    const char* getName(i32 id);
+    const char* getBigfileName(i32 id);
 
     int findVenueIndex(const char* name);
 
-    eVenueId checkId(eVenueId id);
+    i32 checkId(i32 id);
 
 private:
     int mVenueCount;
