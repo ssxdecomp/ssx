@@ -5,13 +5,10 @@ cVenueDB::cVenueDB()
 	purge();
 }
 
-INCLUDE_ASM("bx/venuedb", _$_8cVenueDB);
-#if 0
 cVenueDB::~cVenueDB() 
 {
     purge();
 }
-#endif
 
 INCLUDE_ASM("bx/venuedb", initOnce__8cVenueDB);
 

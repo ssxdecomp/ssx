@@ -112,12 +112,15 @@ segments:
 
       # --- .data
       - { type: data, start: 0x178900, vram: 0x277900, name: data }
+      - { type: data, start: 0x17f140, vram: 0x27e140, name: bx/venuedb } # note: rodata 0x002af6c0 is where the strings for venueDB start, so probably
+                                                                          # that's also part of rodata for this tu
 
       # --- .vudata
       - { type: databin, vram: 0x2a6ab8, start: 0x1a7ab8, name: vudata }
 
       # --- .rodata
       - { type: rodata, start: 0x1a7b00, vram: 0x2a6b00, name: rodata }
+      - { type: .rodata, start: 0x1b4ce0, vram: 0x2b3ce0, name: bx/venuedb }
 
       # --- .lit4 (TODO: SPLIT)
       - { type: lit4, vram: 0x2c1000, start: 0x1c2000, name: lit4 }

@@ -30,7 +30,7 @@ DRIVER_PATH_FLAG = f"-B{CC_DIR}/lib/gcc-lib/ee/2.9-ee-991111/"
 
 # See tools/cc/README.md for how these were gathered
 COMMON_CFLAGS = "-O2 -fno-edge-lcm -fomit-frame-pointer"
-COMMON_CXXFLAGS = ""
+COMMON_CXXFLAGS = "-fno-exceptions -fno-rtti"
 
 
 COMPILE_C_RULE = f"{CC_DIR}/bin/ee-gcc -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} {COMMON_CFLAGS} $in"
