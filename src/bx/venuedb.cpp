@@ -70,6 +70,17 @@ i32 cVenueDB::findVenueIndex(const char* pszName)
 #endif
 
 INCLUDE_ASM("bx/venuedb", checkId__8cVenueDBi);
+#if 0
+i32 cVenueDB::checkId(i32 id)
+{
+	for (i32 i = 0; i < mVenueCount; i++)
+	{
+		if (mVenues[i].venueId == id)
+			return id;
+	}
+	return -1;
+}
+#endif
 
 i32 cVenueDB::clampId(i32 id)
 {
