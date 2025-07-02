@@ -6,13 +6,18 @@
 // (this will invariably bite me in the ass...)
 __builtin_delete = 0x103778;
 
-// src/bx/main.cpp
+// src/bx/main/main.cpp
 // FUNCS
+    bxInit__Fv = 0x18a648; // type:func
+    bxMain__FPCc = 0x18a7e8; // type:func
     __NullFunc__FUi = 0x18a858; // type:func
+    bxRestore__Fv = 0x18a828; // type:func
+    systemInit__Fv = 0x18a860; // type:func
     main = 0x18ab98; // type:func
-// (RO)DATA
+// RODATA
+// DATA
 
-// src/bx/venuedb.cpp
+// src/bx/main/venuedb.cpp
 // FUNCS
     __8cVenueDB = 0x18ac50; // type:func
     _$_8cVenueDB = 0x18ac78; // type:func
@@ -23,5 +28,6 @@ __builtin_delete = 0x103778;
     findVenueIndex__8cVenueDBPCc = 0x18adf0; // type:func
     checkId__8cVenueDBi = 0x18ae70; // type:func
     clampId__8cVenueDBi = 0x18aea8; // type:func
-// (RO)DATA
+// RODATA
     _8cVenueDB$venueDB = 0x27e140; // size:0xf0
+// DATA

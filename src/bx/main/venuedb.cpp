@@ -10,7 +10,7 @@ cVenueDB::~cVenueDB()
     purge();
 }
 
-INCLUDE_ASM("bx/venuedb", initOnce__8cVenueDB);
+INCLUDE_ASM("bx/main/venuedb", initOnce__8cVenueDB);
 
 void cVenueDB::purge()
 {
@@ -18,7 +18,6 @@ void cVenueDB::purge()
 	mUnk = 0;
 }
 
-INCLUDE_ASM("bx/venuedb", getName__8cVenueDBi);
 #if 0
 // not matching :( but REALLY close
 // (literally one wrong register off)
@@ -30,9 +29,10 @@ const char* cVenueDB::getName(i32 venueId)
     }
     return mVenues[venueId].alternateName;
 }
+#else
+INCLUDE_ASM("bx/main/venuedb", getName__8cVenueDBi);
 #endif
 
-INCLUDE_ASM("bx/venuedb", getBigfileName__8cVenueDBi);
 #if 0
 const char* cVenueDB::getBigfileName(i32 venueId) 
 {
@@ -42,9 +42,10 @@ const char* cVenueDB::getBigfileName(i32 venueId)
     }
     return mVenues[venueId].bigFilename;
 }
+#else
+INCLUDE_ASM("bx/main/venuedb", getBigfileName__8cVenueDBi);
 #endif
 
-INCLUDE_ASM("bx/venuedb", findVenueIndex__8cVenueDBPCc);
 #if 0
 i32 cVenueDB::findVenueIndex(const char* pszName) 
 {
@@ -55,7 +56,7 @@ i32 cVenueDB::findVenueIndex(const char* pszName)
         if(mVenueCount <= i)
             break;
         
-        if(strcmp(pszName, pVenue->bigFileName) == 0)
+        if(strcmp(pszName, pVenue->bigFilename) == 0)
             break;
         
         pVenue++;
@@ -64,9 +65,10 @@ i32 cVenueDB::findVenueIndex(const char* pszName)
 
     return i;
 }
+#else
+INCLUDE_ASM("bx/main/venuedb", findVenueIndex__8cVenueDBPCc);
 #endif
 
-INCLUDE_ASM("bx/venuedb", checkId__8cVenueDBi);
 #if 0
 i32 cVenueDB::checkId(i32 id)
 {
@@ -77,6 +79,8 @@ i32 cVenueDB::checkId(i32 id)
 	}
 	return -1;
 }
+#else
+INCLUDE_ASM("bx/main/venuedb", checkId__8cVenueDBi);
 #endif
 
 i32 cVenueDB::clampId(i32 id)

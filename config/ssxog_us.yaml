@@ -31,6 +31,8 @@ options:
 
   named_regs_for_c_funcs: False
 
+  use_gp_rel_macro_nonmatching: False
+
   create_undefined_funcs_auto: True
   undefined_funcs_auto_path: config/undefined_funcs_auto.txt
   create_undefined_syms_auto: True
@@ -96,11 +98,11 @@ segments:
                                         # order is suspect of this being the case, since this split also contains
                                         # the first static initalizer function
 
-      - { type: asm, start: 0x8b648, name: bx/main }
+      - { type: cpp, start: 0x8b648, name: bx/main/main }
 
       - { type: asm, start: 0x8bc08, name: lib/sdk/newlib/printf }
 
-      - { type: cpp, start: 0x8bc50, name: bx/venuedb }
+      - { type: cpp, start: 0x8bc50, name: bx/main/venuedb }
       
       - { type: asm, start: 0x8bec8, name: bx/unk_global_memory_operators }
 
@@ -112,7 +114,7 @@ segments:
 
       # --- .data
       - { type: data, start: 0x178900, vram: 0x277900, name: data }
-      - { type: data, start: 0x17f140, vram: 0x27e140, name: bx/venuedb } # note: rodata 0x002af6c0 is where the strings for venueDB start, so probably
+      - { type: data, start: 0x17f140, vram: 0x27e140, name: bx/main/venuedb } # note: rodata 0x002af6c0 is where the strings for venueDB start, so probably
                                                                           # that's also part of rodata for this tu
 
       # --- .vudata
@@ -120,7 +122,7 @@ segments:
 
       # --- .rodata
       - { type: rodata, start: 0x1a7b00, vram: 0x2a6b00, name: rodata }
-      #- { type: .rodata, start: 0x1b4ce0, vram: 0x2b3ce0, name: bx/venuedb }
+      #- { type: .rodata, start: 0x1b4ce0, vram: 0x2b3ce0, name: bx/main/venuedb }
 
       # --- .lit4 (TODO: SPLIT)
       - { type: lit4, vram: 0x2c1000, start: 0x1c2000, name: lit4 }
