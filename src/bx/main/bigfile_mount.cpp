@@ -16,12 +16,24 @@ i32 cBigfileMount::mount(const char* bigfileName, int memFlags)
 	strcpy(&this->mBigfileName[0], bigfileName);
 	int res = FILESYS_existssync(mBigfileName, 100);
 	mBigStatus = static_cast<i32>(res != 0);
-    if(res != 0) {
-        res = FILESYS_addbigsync(mBigfileName, memFlags, 100, &mBigHandle);
-        mBigStatus = static_cast<i32>(res != 0);
-    }
+	if (res != 0)
+	{
+		res = FILESYS_addbigsync(mBigfileName, memFlags, 100, &mBigHandle);
+		mBigStatus = static_cast<i32>(res != 0);
+	}
 
-    return mBigStatus;
+	return mBigStatus;
 }
 
-INCLUDE_ASM("bx/main/bigfile_mount", unmount__13cBigfileMount);
+i32 cBigfileMount::unmount()
+{
+	i32 ret = 0;
+
+	if (mBigStatus != 0)
+	{
+		ret = FILESYS_delbigsync(mBigHandle, 100) != 0;
+	}
+
+	reset();
+	return ret;
+}
