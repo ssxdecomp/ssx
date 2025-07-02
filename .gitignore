@@ -24,6 +24,8 @@ config/undefined_syms_auto.txt
 # stuff
 disc/
 
+/scratches
+
 # objdiff
 /objdiff.json
 

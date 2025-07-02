@@ -106,6 +106,10 @@ segments:
       
       - { type: asm, start: 0x8bec8, name: bx/unk_global_memory_operators }
 
+      - { type: cpp, start: 0x11a1a8, name: bx/main/bigfile_mount }
+      
+      - { type: asm, start: 0x11a328, name: bx/main/bigfile }
+
       # -- end of text
 
       # --- .vutext
