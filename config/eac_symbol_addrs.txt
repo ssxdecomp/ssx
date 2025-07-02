@@ -1,1 +1,7 @@
 // placeholder for EAC/REAL/SND/SPCH symbol addresses
+
+
+// filesys
+FILESYS_addbigsync = 0x23a288; // type:func
+FILESYS_delbigsync = 0x23a2f8; // type:func
+FILESYS_existssync = 0x23a350; // type:func

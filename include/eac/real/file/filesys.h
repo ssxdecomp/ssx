@@ -5,11 +5,15 @@
 extern "C" {
 #endif
 
+int FILESYS_existssync(const char* filename, int priority);
+
 // FIXME: Add the non-sync versions when we import more filesys stuff :(
-bool FILESYS_addbigsync(const char* filename, int memflags, int priority, int* retbigptr);
-bool FILESYS_delbigsync(int bighandle, int priority);
+int FILESYS_addbigsync(const char* filename, int memflags, int priority, int* retbigptr);
+int FILESYS_delbigsync(int bighandle, int priority);
 
 
 #if __cplusplus
 };
+#endif
+
 #endif

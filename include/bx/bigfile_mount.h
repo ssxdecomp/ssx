@@ -12,8 +12,8 @@ public:
     cBigfileMount();
     ~cBigfileMount();
 
-    bool mount(const char* bigfileName, int memFlags);
-    bool unmount();
+    i32 mount(const char* bigfileName, int memFlags);
+    i32 unmount();
     void reset();
 };
 
