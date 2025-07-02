@@ -210,7 +210,7 @@ def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False, objects_
     ninja.rule(
         "ld",
         description="link $out",
-        command=f"{DECOMPALS_BINUTILS}ld {ld_args}",
+        command=f"{DECOMPALS_BINUTILS}/mips-ps2-decompals-ld {ld_args}",
     )
 
     if not skip_checksum:
@@ -223,7 +223,7 @@ def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False, objects_
     ninja.rule(
         "elf",
         description="elf $out",
-        command=f"{DECOMPALS_BINUTILS}objcopy $in $out -O binary",
+        command=f"{DECOMPALS_BINUTILS}/mips-ps2-decompals-objcopy $in $out -O binary",
     )
 
     # Add recipes for everything
