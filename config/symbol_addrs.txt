@@ -6,6 +6,8 @@
 // (this will invariably bite me in the ass...)
 __builtin_delete = 0x103778;
 
+bxUnk__FiPPc = 0x18a278; // type:func
+
 // src/bx/main/main.cpp
 // FUNCS
     bxInit__Fv = 0x18a648; // type:func

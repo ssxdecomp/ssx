@@ -6,6 +6,8 @@ void bxInit();
 void bxMain(const char* pszExe);
 void bxRestore();
 
+void bxUnk(int argc, char** argv);
+
 INCLUDE_ASM("bx/main/main", bxInit__Fv);
 
 INCLUDE_ASM("bx/main/main", bxMain__FPCc);
@@ -34,3 +36,15 @@ void __NullFunc(u32) {
 INCLUDE_ASM("bx/main/main", systemInit__Fv);
 
 INCLUDE_ASM("bx/main/main", main);
+
+#if 0
+int main(int argc, char** argv) {
+    __NullFunc(0x2080ff);
+    systemInit();
+    bxUnk(argc, argv);
+    bxInit();
+    bxMain(argv[0]);
+    bxRestore();
+    return 0;
+}
+#endif
