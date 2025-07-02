@@ -14,4 +14,4 @@ strcmp = 0x25baa0; // type:func
 strcpy = 0x25bbe4; // type:func
 
 // libgcc
-__main = 0x255e8; // type:func
+__main = 0x255ae8; // type:func
