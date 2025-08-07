@@ -1,5 +1,7 @@
 // placeholder for EAC/REAL/SND/SPCH symbol addresses
 
+// realcore
+abortcallback = 0x2c5acc; // size:0x4
 
 // filesys
 FILESYS_addbigsync = 0x23a288; // type:func

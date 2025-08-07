@@ -35,6 +35,16 @@ bxUnk__FiPPc = 0x18a278; // type:func
 // DATA
 
 
+// src/bx/input/padcache.cpp
+// FUNCS
+
+// RODATA
+// DATA
+    gPadCache = 0x285290; // size:0x28
+    gPadConversionTable = 0x2852b8; // size:0x40
+// END
+
+
 // bx/main/bigfile_mount.cpp
 // FUNCS
 __13cBigfileMount = 0x2191a8; // type:func
@@ -44,3 +54,4 @@ mount__13cBigfileMountPCci = 0x219260; // type:func
 unmount__13cBigfileMount = 0x2192d8; // type:func
 // RODATA
 // DATA
+// END

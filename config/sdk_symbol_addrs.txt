@@ -15,3 +15,67 @@ strcpy = 0x25bbe4; // type:func
 
 // libgcc
 __main = 0x255ae8; // type:func
+
+
+
+// libpad.a [libpad.o]
+// TEXT
+_send_to_iop = 0x246940; // type:func
+scePadInit = 0x2469c8; // type:func
+scePadInit2 = 0x246ad8; // type:func
+scePadEnd = 0x246b70; // type:func
+scePadPortOpen = 0x246bf0; // type:func
+scePadPortClose = 0x246d48; // type:func
+scePadGetDmaStr = 0x246dc0; // type:func
+scePadGetFrameCount = 0x246e20; // type:func
+scePadRead = 0x246e40; // type:func
+scePadGetState = 0x246ed0; // type:func
+scePadStateIntToStr = 0x246f88; // type:func
+scePadSetReqState = 0x246fc0; // type:func
+scePadGetReqState = 0x247038; // type:func
+scePadReqIntToStr = 0x2470a0; // type:func
+scePadInfoAct = 0x2470d8; // type:func
+scePadInfoComb = 0x2471c8; // type:func
+scePadInfoMode = 0x2472b0; // type:func
+scePadSetMainMode = 0x2473b8; // type:func
+scePadSetActDirect = 0x247468; // type:func
+scePadSetActAlign = 0x247500; // type:func
+scePadGetButtonMask = 0x2475d0; // type:func
+scePadSetButtonInfo = 0x247640; // type:func
+scePadInfoPressMode = 0x2476f0; // type:func
+scePadEnterPressMode = 0x247720; // type:func
+scePadExitPressMode = 0x247740; // type:func
+scePadSetVrefParam = 0x247760; // type:func
+scePadGetPortMax = 0x247828; // type:func
+scePadGetSlotMax = 0x247890; // type:func
+scePadGetConnection = 0x2478f8; // type:func
+scePadGetModVersion = 0x247968; // type:func
+// RODATA
+// DATA
+
+// This is a static but I'm not sure the best way to go about it. 
+// It has the same name in all SDK libraries, "__ps2_libinfo".
+// This symbol is how "prver" picks up rtlib versions.
+__ps2_libinfo_libpad = 0x2a51d8; // size:0x10
+isInit = 0x2a51e8; // size:0x4
+PadStateStr = 0x2a51f0; // size:0x20
+ReqStateStr = 0x2a5210; // size:0xc
+// BSS
+padsif = 0x2d1800; // size:0x28
+unksif = 0x2d1828; // size:0x28
+buffer = 0x2d1e80; // size:0x80
+// END
+
+
+// libkernl
+
+// sifrpc.o
+// TEXT
+sceSifInitRpc = 0x266a80; // type:func
+sceSifBindRpc = 0x2670b8; // type:func
+sceSifCallRpc = 0x267268; // type:func
+sceSifCheckStatRPC = 0x267420; // type:func
+// RODATA
+// DATA
+// BSS
+// END

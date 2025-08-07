@@ -27,7 +27,7 @@ options:
   auto_decompile_empty_functions: True
   do_c_func_detection: True
   suggestion_rodata_section_start: True
-  migrate_rodata_to_functions: True
+  migrate_rodata_to_functions: False
 
   named_regs_for_c_funcs: False
 
@@ -82,13 +82,13 @@ segments:
     type: code
     start: 0x1000
     vram: 0x100000
-    bss_size: 0x1227c # I think?
+    bss_size: 0x1228c # I think?
     align: 4
     subalign: null
     subsegments:
       # -- .text
 
-      - { type: asm, start: 0x001000, vram: 0x100000, name: lib/sdk/sce/crt0 }
+      - { type: asm, start: 0x001000, vram: 0x100000, name: sdk/crt0 }
 
       # start of actual sources (besides crt0)
 
@@ -99,16 +99,12 @@ segments:
                                         # the first static initalizer function
 
       - { type: cpp, start: 0x8b648, name: bx/main/main }
-
-      - { type: asm, start: 0x8bc08, name: lib/sdk/newlib/printf }
-
+      - { type: asm, start: 0x8bc08, name: sdk/newlib/printf }
       - { type: cpp, start: 0x8bc50, name: bx/main/venuedb }
-      
       - { type: asm, start: 0x8bec8, name: bx/unk_global_memory_operators }
-
       - { type: cpp, start: 0x11a1a8, name: bx/main/bigfile_mount }
-      
       - { type: asm, start: 0x11a328, name: bx/main/bigfile }
+      - { type: asm, start: 0x147940, name: sdk/libpad/libpad }
 
       # -- end of text
 
@@ -120,6 +116,7 @@ segments:
       - { type: data, start: 0x178900, vram: 0x277900, name: data }
       - { type: data, start: 0x17f140, vram: 0x27e140, name: bx/main/venuedb } # note: rodata 0x002af6c0 is where the strings for venueDB start, so probably
                                                                           # that's also part of rodata for this tu
+      - { type: data,   start: 0x1a61d8, name: sdk/libpad/libpad }
 
       # --- .vudata
       - { type: databin, vram: 0x2a6ab8, start: 0x1a7ab8, name: vudata }
@@ -127,6 +124,7 @@ segments:
       # --- .rodata
       - { type: rodata, start: 0x1a7b00, vram: 0x2a6b00, name: rodata }
       #- { type: .rodata, start: 0x1b4ce0, vram: 0x2b3ce0, name: bx/main/venuedb }
+      - { type: rodata,   start: 0x1bfc78, name: sdk/libpad/libpad }
 
       # --- .lit4 (TODO: SPLIT)
       - { type: lit4, vram: 0x2c1000, start: 0x1c2000, name: lit4 }
@@ -134,12 +132,12 @@ segments:
       # -- SDATA
       - { type: sdata, vram: 0x2c3f80, start: 0x1c4f80, name: sdata }
 
-      # -- SBSS (TODO!!! SPLIT!!!)
+      # -- SBSS
       - { type: sbss, vram: 0x2c5b80, start: 0x1c6b80, name: sbss }
 
-
-      # -- BSS (TODO!! SPLIT!!)
+      # -- BSS
       - { type: bss, vram: 0x2c6c80, start: 0x1c6bf4, name: bss }
+      - { type: bss, vram: 0x2d1800, start: 0x1c6bf4, name: sdk/libpad/libpad }
 
       # -- VUBSS
       - { type: bss, vram: 0x2d7f0c, start: 0x1c6bf4, name: vubss }
