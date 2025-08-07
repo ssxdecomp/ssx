@@ -30,7 +30,7 @@ CC_DIR = f"{TOOLS_DIR}/cc/ee-991111"
 DRIVER_PATH_FLAG = f"-B{CC_DIR}/lib/gcc-lib/ee/2.9-ee-991111/"
 
 # See tools/cc/README.md for how these were gathered
-COMMON_CFLAGS = "-O2 -G8 -fno-edge-lcm -fomit-frame-pointer"
+COMMON_CFLAGS = "-O2 -fno-edge-lcm -fomit-frame-pointer"
 COMMON_CXXFLAGS = "-fno-exceptions -fno-rtti"
 
 # TODO: REAL owned C files and SDK owned C files will need different compiler flags...
@@ -190,7 +190,7 @@ def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False, objects_
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w", encoding="utf-8"), width=9999)
 
-    ld_args = "-EL -G8 -T config/undefined_syms_auto.txt -T config/undefined_funcs_auto.txt -Map $mapfile -T $in -o $out"
+    ld_args = "-EL -T config/undefined_syms_auto.txt -T config/undefined_funcs_auto.txt -Map $mapfile -T $in -o $out"
 
     ninja.rule(
         "as",
