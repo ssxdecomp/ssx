@@ -7,9 +7,9 @@ cBigfileMount::cBigfileMount()
 	reset();
 }
 
-INCLUDE_ASM("bx/main/bigfile_mount", _$_13cBigfileMount);
+INCLUDE_ASM("asm/nonmatchings/bx/main/bigfile_mount", _$_13cBigfileMount);
 
-INCLUDE_ASM("bx/main/bigfile_mount", reset__13cBigfileMount);
+INCLUDE_ASM("asm/nonmatchings/bx/main/bigfile_mount", reset__13cBigfileMount);
 
 i32 cBigfileMount::mount(const char* bigfileName, int memFlags)
 {

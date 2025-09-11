@@ -10,7 +10,7 @@ cVenueDB::~cVenueDB()
     purge();
 }
 
-INCLUDE_ASM("bx/main/venuedb", initOnce__8cVenueDB);
+INCLUDE_ASM("asm/nonmatchings/bx/main/venuedb", initOnce__8cVenueDB);
 
 void cVenueDB::purge()
 {
@@ -30,7 +30,7 @@ const char* cVenueDB::getName(i32 venueId)
     return mVenues[venueId].alternateName;
 }
 #else
-INCLUDE_ASM("bx/main/venuedb", getName__8cVenueDBi);
+INCLUDE_ASM("asm/nonmatchings/bx/main/venuedb", getName__8cVenueDBi);
 #endif
 
 #if 0
@@ -43,7 +43,7 @@ const char* cVenueDB::getBigfileName(i32 venueId)
     return mVenues[venueId].bigFilename;
 }
 #else
-INCLUDE_ASM("bx/main/venuedb", getBigfileName__8cVenueDBi);
+INCLUDE_ASM("asm/nonmatchings/bx/main/venuedb", getBigfileName__8cVenueDBi);
 #endif
 
 #if 0
@@ -66,7 +66,7 @@ i32 cVenueDB::findVenueIndex(const char* pszName)
     return i;
 }
 #else
-INCLUDE_ASM("bx/main/venuedb", findVenueIndex__8cVenueDBPCc);
+INCLUDE_ASM("asm/nonmatchings/bx/main/venuedb", findVenueIndex__8cVenueDBPCc);
 #endif
 
 #if 0
@@ -80,7 +80,7 @@ i32 cVenueDB::checkId(i32 id)
 	return -1;
 }
 #else
-INCLUDE_ASM("bx/main/venuedb", checkId__8cVenueDBi);
+INCLUDE_ASM("asm/nonmatchings/bx/main/venuedb", checkId__8cVenueDBi);
 #endif
 
 i32 cVenueDB::clampId(i32 id)

@@ -8,11 +8,11 @@ void bxRestore();
 
 void bxUnk(int argc, char** argv);
 
-INCLUDE_ASM("bx/main/main", bxInit__Fv);
+INCLUDE_ASM("asm/nonmatchings/bx/main/main", bxInit__Fv);
 
-INCLUDE_ASM("bx/main/main", bxMain__FPCc);
+INCLUDE_ASM("asm/nonmatchings/bx/main/main", bxMain__FPCc);
 
-INCLUDE_ASM("bx/main/main", bxRestore__Fv);
+INCLUDE_ASM("asm/nonmatchings/bx/main/main", bxRestore__Fv);
 
 // Fun trivia: In an interview with Scott Henshaw (lead director for SSX OG), he says:
 // <QUOTE>
@@ -33,9 +33,9 @@ void __NullFunc(u32) {
     return;
 }
 
-INCLUDE_ASM("bx/main/main", systemInit__Fv);
+INCLUDE_ASM("asm/nonmatchings/bx/main/main", systemInit__Fv);
 
-INCLUDE_ASM("bx/main/main", main);
+INCLUDE_ASM("asm/nonmatchings/bx/main/main", main);
 
 #if 0
 int main(int argc, char** argv) {
