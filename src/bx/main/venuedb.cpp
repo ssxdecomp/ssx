@@ -5,9 +5,9 @@ cVenueDB::cVenueDB()
 	purge();
 }
 
-cVenueDB::~cVenueDB() 
+cVenueDB::~cVenueDB()
 {
-    purge();
+	purge();
 }
 
 INCLUDE_ASM("asm/nonmatchings/bx/main/venuedb", initOnce__8cVenueDB);
@@ -18,33 +18,23 @@ void cVenueDB::purge()
 	mUnk = 0;
 }
 
-#if 0
-// not matching :( but REALLY close
-// (literally one wrong register off)
-const char* cVenueDB::getName(i32 venueId) 
+const char* cVenueDB::getName(i32 venueId)
 {
-    if(venueId >= 0)
-    {
-        venueId = mVenueCount > venueId;
-    }
-    return mVenues[venueId].alternateName;
+	if (venueId >= 0)
+	{
+		venueId = mVenueCount > venueId;
+	}
+	return mVenues[venueId].alternateName;
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/bx/main/venuedb", getName__8cVenueDBi);
-#endif
 
-#if 0
-const char* cVenueDB::getBigfileName(i32 venueId) 
+const char* cVenueDB::getBigfileName(i32 venueId)
 {
-    if(venueId >= 0) 
-    {
-        venueId = mVenueCount > venueId;
-    }
-    return mVenues[venueId].bigFilename;
+	if (venueId >= 0)
+	{
+		venueId = (venueId < mVenueCount) ? venueId : venueId++;
+	}
+	return mVenues[venueId].bigFilename;
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/bx/main/venuedb", getBigfileName__8cVenueDBi);
-#endif
 
 #if 0
 i32 cVenueDB::findVenueIndex(const char* pszName) 
