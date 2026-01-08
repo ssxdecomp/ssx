@@ -1,41 +1,34 @@
 # SSX (2000)
 
-This is a work-in-progress decompilation of SSX (2000) for the PlayStation 2.
+This is a work-in-progress matching decompilation of SSX (2000) for the PlayStation 2.
 
-This project builds the NTSC-U version of the game (`SLUS_200.95`, sha1 `72d85fcefffc2bcaa1eeacbc02a8965ababb6e92`). Other regions and versions may be considered once NTSC-U has been completed and matched.
+This project builds the NTSC-U version of the game (`SLUS_200.95`, SHA1 `72d85fcefffc2bcaa1eeacbc02a8965ababb6e92`). 
+
+Other regions and versions may be considered once NTSC-U has been completed.
 
 ## Setup
 
 You will need:
 
-- a Linux system that can run 32 bit applications. WSL2 should work as well.
-- Python (with pipenv)
+- a Linux system that can run 32 bit applications. (WSL2 works in a pinch, but won't be as fast.)
+- Python (and pipenv)
 - A NTSC-U disc image (obtained legally)
-
-### Arch Linux
-
-`# pacman -S lib32-gcc-libs`
-
-### Debian/Ubuntu
-
-`# apt install -y pipenv ninja-build`
 
 Make a `disc` directory in the root of this repository, and copy the files from the NTSC-U game disc.
 
-Download required tools:
+Run the quick start script. On supported distributions (feel free to PR support), the script will install all of the dependencies for you automatically and run all of the setup steps.
 
 ```bash
-$ ./download.sh
+$ ./scripts/quickstart.sh
 ```
 
-Setup a venv for splat:
+Once the quickstart script finishes, run the following commands:
 
 ```bash
-$ pipenv install
+$ pipenv shell
+(ssx) $ ./configure.py
 ```
-
-`pipenv run ./configure.py` ultimately does the setup.
 
 ## Building
 
-`ninja` should do the trick.
+Simply run `ninja`.
