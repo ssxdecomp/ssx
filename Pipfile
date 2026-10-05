@@ -15,6 +15,3 @@ crunch64 = ">=0.5.1"
 mapfile-parser = "*"
 
 [dev-packages]
-
-[requires]
-python_version = "3.13"

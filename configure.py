@@ -25,25 +25,39 @@ PRE_ELF_PATH = f"{OUTDIR}/{BASENAME}.elf"
 
 COMMON_INCLUDES = "-Iinclude -isystem include/sdk/ee -isystem include/gcc"
 
-
 CC_DIR = f"{TOOLS_DIR}/cc/ee-991111"
 DRIVER_PATH_FLAG = f"-B{CC_DIR}/lib/gcc-lib/ee/2.9-ee-991111/"
 
 # See tools/cc/README.md for how these were gathered
-COMMON_CFLAGS = "-O2 -fno-edge-lcm -fomit-frame-pointer"
-COMMON_CXXFLAGS = "-fno-exceptions -fno-rtti"
+BX_COMMON_CFLAGS = "-O2 -fno-edge-lcm -fomit-frame-pointer"
+BX_COMMON_CXXFLAGS = "-fno-exceptions -fno-rtti"
 
-# TODO: REAL owned C files and SDK owned C files will need different compiler flags...
-# it'd probably be possible to override the flags
-# (at some point it would be realllly nice to make this not one file because god its a mess)
-COMPILE_C_RULE = f"{CC_DIR}/bin/ee-gcc -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} {COMMON_CFLAGS} $in"
-COMPILE_CXX_RULE = f"{CC_DIR}/bin/ee-gcc -xc++ -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} {COMMON_CFLAGS} {COMMON_CXXFLAGS} $in"
+COMPILE_RULES = {
+    "bx": {
+        'c': f"{CC_DIR}/bin/ee-gcc -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} {BX_COMMON_CFLAGS} $in",
+        'cpp': f"{CC_DIR}/bin/ee-gcc -xc++ -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} {BX_COMMON_CFLAGS} {BX_COMMON_CXXFLAGS} $in"
+    },
+    'real': {
+        'c': f"{CC_DIR}/bin/ee-gcc -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} -G8 -mcheck-zero-division -O1 $in",
+        'cpp': f"{CC_DIR}/bin/ee-gcc -xc++ -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} -G8 -O2 $in"
+    },
+    'sce': {
+        'c': f"{CC_DIR}/bin/ee-gcc -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} -G8 -O2 $in",
+        'cpp': f"{CC_DIR}/bin/ee-gcc -xc++ -c {COMMON_INCLUDES} {DRIVER_PATH_FLAG} -G8 -O2 $in"
+    }
+}
 
 # Path to decompals binutils.
 DECOMPALS_BINUTILS = "tools/binutils/"
 
 CATEGORY_MAP = {
-    "sce": "Libs",
+    "sce": "Sce libs",
+    "eac/spch": "spp2z341.a",
+    "eac/real/realcore": "librealcorez.a",
+    "eac/real/realmem": "librealmemz.a",
+    "eac/real/realfile": "librealfilez.a",
+    "eac/real/realfont": "librealfontz.a",
+    "eac/snd": "libsndps2z.a",
     "data": "Data",
 }
 
@@ -64,24 +78,23 @@ def clean():
     shutil.rmtree("obj", ignore_errors=True)
     shutil.rmtree("out", ignore_errors=True)
 
-
-def write_permuter_settings():
-    with open("permuter_settings.toml", "w", encoding="utf-8") as f:
-        f.write(f"""compiler_command = "{COMPILE_CXX_RULE} -D__GNUC__"
-assembler_command = "mips-linux-gnu-as -march=r5900 -mabi=eabi -Iinclude"
-compiler_type = "gcc"
-
-[preserve_macros]
-
-[decompme.compilers]
-"tools/cc/ee-991111/bin/ee-gcc" = "ee-gcc2.9-991111"
-""")
+# converts object path to compile rule kind for the target object
+# This is needed because some objects were compiled with different compile flags to BX
+def object_path_to_compiler_kind(path: str) -> str:
+    if path.startswith('obj/src/eac/real'):
+        return 'real'
+    if path.startswith('obj/src/sdk'):
+        return 'sce'
+    if path.startswith('obj/src/bx'):
+        return 'bx'
+    raise ValueError(f'Unidentified split kind for {path}')
 
 def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False, objects_only=False, dual_objects=False):
     """
     Build the objects and the final ELF file.
     If objects_only is True, only build objects and skip linking/checksum.
-    If dual_objects is True, build objects twice: once normally, once with -DSKIP_ASM.
+    If dual_objects is True, build objects twice: BX_COMMON_CFLAGS = "-O2 -fno-edge-lcm -fomit-frame-pointer"
+BX_COMMON_CXXFLAGS = "-fno-exceptions -fno-rtti"once normally, once with -DSKIP_ASM.
     """
     built_objects: Set[Path] = set()
     objdiff_units = []  # For objdiff.json
@@ -112,9 +125,13 @@ def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False, objects_
             object_paths = [object_paths]
 
         # Only rewrite output path to .o if out_dir is set (i.e. --objects mode)
+        # Otherwise, use the original object_paths (with .s.o, .c.o, etc.)
         if out_dir:
             new_object_paths = []
             for obj in object_paths:
+                 # replace task with
+                if task=='cc' or task=='cpp':
+                    task = f'{task}_{object_path_to_compiler_kind(str(obj))}'
                 obj = Path(obj)
                 stem = obj.stem
                 if obj.suffix in [".s", ".c" , ".cpp"]:
@@ -126,8 +143,11 @@ def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False, objects_
                 new_obj = Path(target_dir) / (stem + ".o")
                 new_object_paths.append(new_obj)
             object_paths = new_object_paths
+        else:
+            for obj in object_paths:
+                if task=='cc' or task=='cpp':
+                    task = f'{task}_{object_path_to_compiler_kind(str(obj))}'
 
-        # Otherwise, use the original object_paths (with .s.o, .c.o, etc.)
 
         # Convert paths to strings
         object_strs = [str(obj) for obj in object_paths]
@@ -198,17 +218,18 @@ def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False, objects_
         command=f"cpp {COMMON_INCLUDES} $in -o  - | {DECOMPALS_BINUTILS}/mips-ps2-decompals-as -no-pad-sections -EL -march=5900 -mabi=eabi -Iinclude -o $out",
     )
 
-    ninja.rule(
-        "cc",
-        description="cc $in",
-        command=f"{COMPILE_C_RULE} $cflags -o $out && {DECOMPALS_BINUTILS}/mips-ps2-decompals-strip $out -N dummy-symbol-name",
-    )
-
-    ninja.rule(
-        "cpp",
-        description="cpp $in",
-        command=f"{COMPILE_CXX_RULE} $cflags -o $out && {DECOMPALS_BINUTILS}/mips-ps2-decompals-strip $out -N dummy-symbol-name",
-    )
+    # Create cc/cxx rules for each compile kind.
+    for key in COMPILE_RULES.keys():
+        ninja.rule(
+            f"cc_{key}",
+            description="cc ({key}) $in",
+            command=f"{COMPILE_RULES[key]['c']} $cflags -o $out && {DECOMPALS_BINUTILS}/mips-ps2-decompals-strip $out -N dummy-symbol-name",
+        )
+        ninja.rule(
+            f"cpp_{key}",
+            description="cxx ({key}) $in",
+            command=f"{COMPILE_RULES[key]['cpp']} $cflags -o $out && {DECOMPALS_BINUTILS}/mips-ps2-decompals-strip $out -N dummy-symbol-name",
+        )
 
     ninja.rule(
         "ld",
@@ -248,11 +269,17 @@ def build_stuff(linker_entries: List[LinkerEntry], skip_checksum=False, objects_
             else:
                 build(entry.object_path, entry.src_paths, "as")
         elif isinstance(seg, splat.segtypes.common.c.CommonSegC):
+            task = "cc"
+            # for some reason splat is conflating cpp segments,
+            # despite the fact they are type:cpp.
+            if str(entry.object_path).endswith('.cpp.o'):
+                task = "cpp"
+
             if dual_objects:
-                build(entry.object_path, entry.src_paths, "cc", out_dir="obj/target", collect_objdiff=True, orig_entry=entry)
-                build(entry.object_path, entry.src_paths, "cc", out_dir="obj/current", extra_flags="-DSKIP_ASM")
+                build(entry.object_path, entry.src_paths, task, out_dir="obj/target", collect_objdiff=True, orig_entry=entry)
+                build(entry.object_path, entry.src_paths, task, out_dir="obj/current", extra_flags="-DSKIP_ASM")
             else:
-                build(entry.object_path, entry.src_paths, "cc")
+                build(entry.object_path, entry.src_paths, task)
         elif isinstance(seg, splat.segtypes.common.cpp.CommonSegCpp):
             if dual_objects:
                 build(entry.object_path, entry.src_paths, "cpp", out_dir="obj/target", collect_objdiff=True, orig_entry=entry)
@@ -397,8 +424,6 @@ def main():
         build_stuff(linker_entries, skip_checksum=True, objects_only=True, dual_objects=True)
     else:
         build_stuff(linker_entries, do_skip_checksum)
-
-    write_permuter_settings()
 
 if __name__ == "__main__":
     main()

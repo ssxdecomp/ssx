@@ -25,11 +25,9 @@ Second party components largely written in C (or being started to be refactored 
 
 e.g: `SND_initsys` etc etc.
 
-SPCH is primairly C++ but also uses this C interface pattern.
-
 ## For SSX code
 
-Variables use a subset of Systems Hungarian, with some changes. (Function parameters seem to randomly choose to use Hungarian notation or not, so you can worry about using it less there.)
+Variables most of the time use a subset of Systems Hungarian, with some changes. (Function parameters seem to randomly choose to use Hungarian notation or not, so you can worry about using it less there.) When it is not used, default to PascalCase.
 
 The advised subset is something like this:
 
@@ -59,7 +57,7 @@ There are also special prefixes for variables used in certain cases:
 
 Function names are Pascal case regardless of scope (either namespace or class member).
 
-Note that Asyncsys uses second party function naming for.. some reason.
+Note that Newsound uses second party function naming for.. some reason.
 
 ## Examples
 

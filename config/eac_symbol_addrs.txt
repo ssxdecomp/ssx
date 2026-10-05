@@ -3,6 +3,48 @@
 // realcore
 abortcallback = 0x2c5acc; // size:0x4
 
+// TODO split
+REAL_addexit=0x23e540; // type:func
+
+// eac/real/realcore/cmn/systemvars.c
+// .sdata
+ticks = 0x2c5a9c; // size:4
+libticks = 0x2c5aa0; // size:4
+// .end
+
+// eac/real/realcore/ps2/inittmr.c
+// .text
+TIMER_init = 0x234f08; // type:func
+TIMER_restore = 0x235020; // type:func
+// Probably static
+tmrint = 0x235070; // type:func
+SaveFloatRegs = 0x2353a0; // type:func
+RestoreFloatRegs = 0x235528; // type:func
+// .rodata
+// .data
+// .sdata
+bIsTimerInited = 0x2c5990; // size:4
+// .bss
+//end
+
+// eac/real/realcore/cmn/timer.c
+// .text
+TIMER_reset = 0x23efa8; // type:func
+TIMER_gettick = 0x23efc0; // type:func
+TIMER_elapsedticks = 0x23efd0; // type:func
+TIMER_waitticks = 0x23efe8; // type:func
+TIMER_settimeout = 0x23f030; // type:func
+TIMER_testtimeout = 0x23f040; // type:func
+TIMER_waittimeout = 0x23f058; // type:func
+// .rodata
+// .data
+// .sdata
+tickset = 0x2c5b04; // size:4
+tickval = 0x2c5b08; // size:4
+// .bss
+//end
+
+
 // filesys
 FILESYS_addbigsync = 0x23a288; // type:func
 FILESYS_delbigsync = 0x23a2f8; // type:func

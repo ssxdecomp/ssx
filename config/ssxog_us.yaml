@@ -104,6 +104,24 @@ segments:
       - { type: asm, start: 0x8bec8, name: bx/unk_global_memory_operators }
       - { type: cpp, start: 0x11a1a8, name: bx/main/bigfile_mount }
       - { type: asm, start: 0x11a328, name: bx/main/bigfile }
+
+      # REAL/EAC libs
+
+      # realcore
+      - { type: c, start: 0x135f08, vram: 0x234f08, name: eac/real/realcore/ps2/inittmr }
+
+      # realfile
+      - { type: asm, start: 0x136630, vram: 0x235630, name: eac/real/realfile/cmn/hlafile }
+      - { type: asm, start: 0x137370, vram: 0x236370, name: eac/real/realfile/cmn/unpack }
+      - { type: asm, start: 0x1376c0, vram: 0x2366c0, name: eac/real/realfile/cmn/hlsfile }
+      - { type: asm, start: 0x137fa0, vram: 0x236fa0, name: eac/real/realfile/cmn/loadpack }
+      - { type: asm, start: 0x138608, vram: 0x237608, name: eac/real/realfile/ps2/filedev }
+      - { type: asm, start: 0x138ae8, vram: 0x237ae8, name: eac/real/realfile/ps2/filesys }
+      - { type: asm, start: 0x13a8a0, vram: 0x2398a0, name: eac/real/realfile/cmn/locatbig }
+      - { type: asm, start: 0x13aea0, vram: 0x239ea0, name: eac/real/realfile/cmn/syncfile }
+      # realcore/cmn/galloc follows?
+      # realcore/cmn/m
+
       - { type: asm, start: 0x147940, name: sdk/libpad/libpad }
 
       # -- end of text
@@ -131,6 +149,7 @@ segments:
 
       # -- SDATA
       - { type: sdata, vram: 0x2c3f80, start: 0x1c4f80, name: sdata }
+      # sdata for eac/real/realcore/ps2/inittmr (or cmn/timer?) starts 0x2c5990
 
       # -- SBSS
       - { type: sbss, vram: 0x2c5b80, start: 0x1c6b80, name: sbss }

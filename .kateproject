@@ -1,0 +1,11 @@
+{
+    "name": "ssx",
+    "files": [
+    {
+        "directory": ".",
+        "filters": ["*"],
+        "recursive": true,
+        "hidden": true
+    }
+]
+}

@@ -32,8 +32,8 @@ class cPadCache
     // Joypads.
     cPadDevice* joypads[4];
 public:
-    void init();
-    void purge();
+    void Init();
+    void Purge();
 };
 
 #endif
