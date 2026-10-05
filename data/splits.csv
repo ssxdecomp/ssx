@@ -1,6 +1,7 @@
 Name,Language,Kind,StartAddr,EndAddr
 sdk/crt0,asm,text,0x00100008,0x001000b7
-source/input/padcache,cpp,text,0x001821b8,0x001834ef
+bx/input/padcache,cpp,text,0x001821b8,0x00182977
+bx/input/ps2pad,cpp,text,0x001829e0,0x001834ef
 real/realfile/ps2/cddrv,c,text,0x0018b010,0x0018bfdf
 bx/mem/blockman,cpp,text,0x00210580,0x00210927
 bx/util/huffread,cpp,text,0x002135d0,0x0021425f
