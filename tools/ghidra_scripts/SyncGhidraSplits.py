@@ -139,9 +139,7 @@ queuedSplitRecord = None
 
 def handleSplitComment(address: int, comment: str):
 	global queuedSplitRecord
-
 	split = shlex.split(comment)
-
 	splitPath = PurePath(split[2])
 	splitFileName = str(splitPath.with_suffix(""))
 
@@ -150,6 +148,8 @@ def handleSplitComment(address: int, comment: str):
 		assert len(split) == 5 # Only valid amount of fields
 		assert split[3] == 'END'
 
+		# An end record can also be the only seen record if only one function/data member
+		# is actually part of the split, so make sure to handle that.
 		if queuedSplitRecord is None:
 			queuedSplitRecord = SplitRecord()
 			queuedSplitRecord.name = splitFileName
@@ -174,7 +174,6 @@ def askFilePython():
 	path = javaFile.getAbsolutePath()
 	return open(path, 'w', newline='')
 
-
 # Go through all plate comments, and process split record comments
 listing = currentProgram.getListing()
 addressSet = currentProgram.getAddressFactory().getAddressSet()
@@ -189,4 +188,3 @@ with askFilePython() as csvFile:
 	csvWriter.writerow(['Name', 'Language', 'Kind', 'StartAddr', 'EndAddr'])
 	for record in knownSplitRecords:
 		csvWriter.writerow([record.name, stringifySplitLanguage(record.language), stringifySplitKind(record.kind), f'0x{record.start:08x}', f'0x{record.end:08x}'])
-		#print(f'{record.name} {record.kind} {record.language} s {record.start:08x}-{record.end:08x}')
