@@ -83,10 +83,10 @@ int TIMER_init(int hz)
 }
 #endif
 
-INCLUDE_ASM("/home/lily/source/ssx/asm/nonmatchings/eac/real/realcore/ps2/inittmr", TIMER_restore);
+INCLUDE_ASM("asm/nonmatchings/eac/real/realcore/ps2/inittmr", TIMER_restore);
 
-INCLUDE_ASM("/home/lily/source/ssx/asm/nonmatchings/eac/real/realcore/ps2/inittmr", tmrint);
+INCLUDE_ASM("asm/nonmatchings/eac/real/realcore/ps2/inittmr", tmrint);
 
-INCLUDE_ASM("/home/lily/source/ssx/asm/nonmatchings/eac/real/realcore/ps2/inittmr", SaveFloatRegs);
+INCLUDE_ASM("asm/nonmatchings/eac/real/realcore/ps2/inittmr", SaveFloatRegs);
 
-INCLUDE_ASM("/home/lily/source/ssx/asm/nonmatchings/eac/real/realcore/ps2/inittmr", RestoreFloatRegs);
+INCLUDE_ASM("asm/nonmatchings/eac/real/realcore/ps2/inittmr", RestoreFloatRegs);
