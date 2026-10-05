@@ -31,3 +31,6 @@ disc/
 
 # decompals
 tools/binutils
+
+# python cache
+**/__pycache__
