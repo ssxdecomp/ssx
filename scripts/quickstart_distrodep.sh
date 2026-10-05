@@ -13,3 +13,13 @@ DISTRO_ID=$(cat /etc/os-release|grep "^ID="|cut -d'=' -f2)
 setup_arch() {
 	sudo pacman -S lib32-gcc-libs ninja python-pipenv
 }
+
+setup_debian() {
+	sudo dpkg --add-architecture i386
+	sudo apt update
+	sudo apt install libc6:i386 libgcc-s1:i386 libstdc++6:i386 gcc-multilib g++-multilib libc6-dev-i386
+}
+
+setup_ubuntu() {
+	setup_debian
+}
