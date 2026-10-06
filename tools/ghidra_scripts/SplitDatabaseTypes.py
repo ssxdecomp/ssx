@@ -114,4 +114,4 @@ class SplitRecord():
 		self.end = 0x0
 	### Returns true if the address given is inside this split.
 	def isAddressInside(self, address: int):
-		return address >= self.start && address < self.end
+		return address >= self.start and address < self.end

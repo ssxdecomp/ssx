@@ -24,16 +24,19 @@ from pathlib import PurePath
 from ghidra.program.model.listing import CodeUnit
 import shlex
 
-
 # Shared database stuff
 from SplitDatabaseTypes import SplitKind, SplitLanguage, SplitRecord
 from SplitDatabaseWriter import SplitDatabaseWriter
 
+import GhidraHelpers
+
 knownSplitRecords : list[SplitRecord] = []
 
+### The last queued split record.
 queuedSplitRecord = None
 
-def handleSplitComment(address: int, comment: str):
+### Parses a single split comment from Ghidra.
+def parseSplitComment(address: int, comment: str):
 	global queuedSplitRecord
 	split = shlex.split(comment)
 	splitPath = PurePath(split[2])
@@ -67,21 +70,17 @@ def handleSplitComment(address: int, comment: str):
 			queuedSplitRecord.kind = SplitKind.parse(split[1])
 			queuedSplitRecord.language = SplitLanguage.parse(splitPath.suffix)
 
-def askFilePython():
-	javaFile = askFile("Select splits.csv file to sync", "Open")
-	path = javaFile.getAbsolutePath()
-	return open(path, 'w', newline='')
-
-# Go through all plate comments, and process split record comments
+# Go through all plate comments, and process known split record comments.
+# This will populate knownSplitRecords[] with all the splits that are in the project.
 listing = currentProgram.getListing()
 addressSet = currentProgram.getAddressFactory().getAddressSet()
 for addr in listing.getCommentAddressIterator(addressSet, True):
 	plateComment = listing.getComment(CodeUnit.PLATE_COMMENT, addr)
 	if plateComment and plateComment.startswith('SPLIT'):
-		handleSplitComment(addr.getOffset(), plateComment)
+		parseSplitComment(addr.getOffset(), plateComment)
 
 # Write the records to the split database file
-with askFilePython() as csvFile:
+with GhidraHelpers.askCsvFilePython(askFile, 'Select splits.csv file to sync', 'w') as csvFile:
 	dbWriter = SplitDatabaseWriter(csvFile)
 	for record in knownSplitRecords:
 		dbWriter.writeRecord(record)
