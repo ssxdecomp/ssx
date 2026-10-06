@@ -158,6 +158,8 @@ def handleSplitComment(address: int, comment: str):
 			queuedSplitRecord.language = parseSplitLanguage(splitPath.suffix)
 		queuedSplitRecord.end = int(split[4], 16)
 
+		assert queuedSplitRecord.end >= queuedSplitRecord.start # Make sure splits are entered correcly
+
 		knownSplitRecords.append(queuedSplitRecord)
 		queuedSplitRecord = None
 	else:
