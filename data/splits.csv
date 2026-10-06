@@ -8,7 +8,8 @@ bx/util/huffread,cpp,text,0x002135d0,0x0021425f
 bx/util/huffabout,cpp,text,0x00214260,0x00214397
 snd/cmn/ssysreal,c,text,0x00224cc8,0x00224d3f
 snd/cmn/sclnt100,c,text,0x002250f0,0x00225217
-snd/cmn/smemman,c,text,0x00225218,0x0022578f
+snd/cmn/smemman,c,text,0x00225218,0x0022552f
+snd/cmn/sbadd,c,text,0x00225530,0x0022578f
 snd/cmn/sbremove,c,text,0x00225790,0x00225957
 snd/cmn/sbvalid,c,text,0x00225958,0x002259a7
 snd/cmn/sbhdrsze,c,text,0x002259a8,0x002259df
@@ -17,7 +18,7 @@ snd/cmn/sresopat,c,text,0x00225b30,0x00225baf
 snd/cmn/sst,c,text,0x00225c68,0x002272cf
 snd/cmn/sstovrhd,c,text,0x002272d0,0x0022735f
 snd/cmn/sststat,c,text,0x00227360,0x00227427
-snd/cmn/sbadd,c,text,0x0022d4c0,0x0022d8c7
+snd/ps2/smemcpy,asm,text,0x0022d7d0,0x0022d8c7
 snd/ps2/smemzero,asm,text,0x0022d8c8,0x0022d99f
 real/realfont/cmn/ustrcore,c,text,0x00234290,0x002345df
 real/realfont/cmn/ustrspf,c,text,0x002345e0,0x00234dbf
