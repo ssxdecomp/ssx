@@ -13,7 +13,11 @@ snd/cmn/sbremove,c,text,0x00225790,0x00225957
 snd/cmn/sbvalid,c,text,0x00225958,0x002259a7
 snd/cmn/sbhdrsze,c,text,0x002259a8,0x002259df
 snd/cmn/sbhdrcpy,c,text,0x002259e0,0x00225a6f
-snd/cmn/sbadd,c,text,0x0022d4c0,0x002345df
+snd/cmn/sresopat,c,text,0x00225b30,0x00225baf
+snd/cmn/sst,c,text,0x00225c68,0x002272cf
+snd/cmn/sbadd,c,text,0x0022d4c0,0x0022d8c7
+snd/ps2/smemzero,asm,text,0x0022d8c8,0x0022d99f
+real/realfont/cmn/ustrcore,c,text,0x00234290,0x002345df
 real/realfont/cmn/ustrspf,c,text,0x002345e0,0x00234dbf
 real/realfont/cmn/loccore,c,text,0x00234dc0,0x00234f07
 real/realcore/ps2/inittmr,c,text,0x00234f08,0x0023562f
