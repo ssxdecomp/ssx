@@ -64,7 +64,6 @@ class SplitKind(IntEnum):
 			case SplitKind.VUBSS:
 				return 'vubss'
 
-
 class SplitLanguage(IntEnum):
 	C = 0
 	CXX = 1
@@ -104,7 +103,8 @@ class SplitLanguage(IntEnum):
 			case SplitLanguage.VUVSM:
 				return 'vsm'
 
-
+### This class repressents a single split, whether that be code
+### or data, tied to a particular translation unit.
 class SplitRecord():
 	def __init__(self):
 		self.kind = SplitKind.TEXT
@@ -112,3 +112,6 @@ class SplitRecord():
 		self.language = SplitLanguage.C
 		self.start = 0x0
 		self.end = 0x0
+	### Returns true if the address given is inside this split.
+	def isAddressInside(self, address: int):
+		return address >= self.start && address < self.end
